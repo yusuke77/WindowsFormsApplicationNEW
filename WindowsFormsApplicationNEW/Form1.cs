@@ -15,12 +15,13 @@ namespace WindowsFormsApplicationNEW
         /***********グローバル変数**************/
         string buttun_push ;//押されたボタンの数字
         string Operator = null;//押された演算子
+        string clr;//clrボタンの文字判別
         float result = 0;//計算結果
         float num1;//左辺
         float num2;//右辺
+        float max_float = 1e30f;//floatの範囲
+        float min_float = 1e-30f;//この範囲外はオーバーフロー
         bool syousuu = false;//小数点フラグ
-        float x = 1e30f;//floatの範囲
-        float y = 1e-30f;//この範囲外はオーバーフロー
 
         public Form1()
         {
@@ -29,7 +30,7 @@ namespace WindowsFormsApplicationNEW
         }
 
         /*******０～９または小数点が押されたとき*******/
-        private void button20_Click(object sender, EventArgs e)
+        private void button_num_Click(object sender, EventArgs e)
         {
             /*senderはobjectの型であり、押されたボタンの文字を取得することができないので、Button型に変形して処理する*/
             Button btn = (Button)sender;//sendorの情報を扱う（どのボタンが押されたかが分かるように）
@@ -61,7 +62,7 @@ namespace WindowsFormsApplicationNEW
         }
 
         /*******演算子または＝が押されたとき *******/
-        private void button12_Click(object sender, EventArgs e)
+        private void button_enzansi_Click(object sender, EventArgs e)
         {
              num1 = result;
           
@@ -84,14 +85,14 @@ namespace WindowsFormsApplicationNEW
                         result = num1 / num2;
                         if (num2 == 0) {           //0の割り算のとき
                             label1.Text = "エラー";
-                            return;}
+                            return; }
                         break;
                     default://演算子が押されてなかったとき、入力文字をそのままresultに入れる
                         result = num2;
                         break;
                 }
             }
-            if (((y <= result) && (result <= x) )||(result==0))//範囲内
+            if (((min_float <= result) && (result <= max_float) )||(result==0))//範囲内
             {
                 label1.Text = result.ToString();//resultをlabel1に表示
                 buttun_push = null;//入力数字のリセット
@@ -103,7 +104,7 @@ namespace WindowsFormsApplicationNEW
                     Operator = null;//演算子をクリア
                 }
             }
-            if( ((result >= x) || (result <= y) )&&(result!=0)) //floatの範囲外(オーバーフロー処理)
+            if( ((result >= max_float) || (result <= min_float) )&&(result!=0)) //floatの範囲外(オーバーフロー処理)
             { 
                 label1.Text = "エラー";//エラー表示
                 buttun_push = null;//入力クリア
@@ -113,20 +114,18 @@ namespace WindowsFormsApplicationNEW
             }
         }
 
-        private void button16_Click(object sender, EventArgs e) //CAが押されたとき
+        private void button_clr_Click(object sender, EventArgs e) //CA,CEが押されたとき
         {
+            Button btn = (Button)sender;//CAかCEを判断する
+            clr = btn.Text;
+            if (clr == "CA")
+            {
+                Operator = null;//演算子クリア
+                result = 0;//結果クリア
+            }
             buttun_push = null;//入力クリア
-            Operator = null;//演算子クリア
-            result = 0;//結果クリア
             syousuu = false;//小数点フラグリセット
             label1.Text ="0";//0表示
-        }
-     
-        private void button17_Click(object sender, EventArgs e)//CEが押されたとき
-        {
-            buttun_push = null;//入力クリア
-            syousuu = false;//小数点フラグリセット
-            label1.Text = "0";//0表示
         }
     }
 }
