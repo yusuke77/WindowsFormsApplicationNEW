@@ -16,9 +16,8 @@ namespace WindowsFormsApplicationNEW
         string buttun_push ;//押されたボタンの数字
         string Operator = null;//押された演算子
         float result = 0;//計算結果
-        float num1;
-        float num2;
-       // float exam;
+        float num1;//左辺
+        float num2;//右辺
         bool syousuu = false;//小数点フラグ
         float x = 1e30f;//floatの範囲
         float y = 1e-30f;//この範囲外はオーバーフロー
@@ -39,7 +38,8 @@ namespace WindowsFormsApplicationNEW
                     if((text=="0") && (syousuu == false) &&(buttun_push==null))//0連続表示しないようにする処理
                     {
                          label1.Text = "0";//0表示
-                         return;
+                         buttun_push += text;//入力された数字に連結する     
+                return;
                     }
                     if ((text == "." ) && (syousuu == false))//小数点表示の処理
                     {
@@ -58,13 +58,6 @@ namespace WindowsFormsApplicationNEW
                     }
             buttun_push += text;//入力された数字に連結する       
             label1.Text = buttun_push;//ラベルに数字を表示
-            
-            /* if (float.TryParse(buttun_push,out exam))
-                 {
-                   label1.Text = exam.ToString(); //ラベルに数字を表示
-                }else{
-                   label1.Text = "エラー";
-                   }*/
         }
 
         /*******演算子または＝が押されたとき *******/
@@ -98,26 +91,25 @@ namespace WindowsFormsApplicationNEW
                         break;
                 }
             }
-
-            if ((result >= x) || (result <= y))//floatの範囲外
-            {
-                label1.Text = "エラー";//エラー表示
-                buttun_push = null;//入力クリア
-                Operator = null;//演算子クリア
-                result = 0;//結果クリア
-                syousuu = false;//小数点フラグリセット
-            }
-            else//範囲内
+            if (((y <= result) && (result <= x) )||(result==0))//範囲内
             {
                 label1.Text = result.ToString();//resultをlabel1に表示
                 buttun_push = null;//入力数字のリセット
                 Button btn = (Button)sender;//数字の時と同様にsenderをbtnに代入
                 Operator = btn.Text;//演算子をoperatorに入れる
                 syousuu = false;//小数点フラグリセット
-                    if (Operator == "=")//operatorが「＝」であるとき
-                    {
-                        Operator = null;//演算子をクリア
-                    }
+                if (Operator == "=")//operatorが「＝」であるとき
+                {
+                    Operator = null;//演算子をクリア
+                }
+            }
+            if( ((result >= x) || (result <= y) )&&(result!=0)) //floatの範囲外(オーバーフロー処理)
+            { 
+                label1.Text = "エラー";//エラー表示
+                buttun_push = null;//入力クリア
+                Operator = null;//演算子クリア
+                result = 0;//結果クリア
+                syousuu = false;//小数点フラグリセット
             }
         }
 
