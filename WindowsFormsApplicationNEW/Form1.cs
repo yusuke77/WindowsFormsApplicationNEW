@@ -20,7 +20,7 @@ namespace WindowsFormsApplicationNEW
         float num1;//左辺
         float num2;//右辺
         float max_float = 1e30f;//floatの範囲
-        float min_float = 1e-30f;//この範囲外はオーバーフロー
+        float min_float = -1e30f;//この範囲外はオーバーフロー
         bool syousuu = false;//小数点フラグ
 
         public Form1()
@@ -40,7 +40,7 @@ namespace WindowsFormsApplicationNEW
                     {
                          label1.Text = "0";//0表示
                          buttun_push += text;//入力された数字に連結する     
-                return;
+                         return;
                     }
                     if ((text == "." ) && (syousuu == false))//小数点表示の処理
                     {
@@ -51,8 +51,8 @@ namespace WindowsFormsApplicationNEW
                                 syousuu = true;//フラグ立てる
                                 return;
                             }
-                            buttun_push += text;//入力された数字に小数点を連結する
-                            label1.Text = buttun_push;//ラベルに数字を表示
+                                buttun_push += text;//入力された数字に小数点を連結する
+                                label1.Text = buttun_push;//ラベルに数字を表示
                             syousuu = true;//フラグ立てる
                     }if ((text == ".") && (syousuu == true)) {//二回目以降は小数点表示を行わない
                                 return;
@@ -64,7 +64,7 @@ namespace WindowsFormsApplicationNEW
         /*******演算子または＝が押されたとき *******/
         private void button_enzansi_Click(object sender, EventArgs e)
         {
-             num1 = result;
+            num1 = result;
           
             if (buttun_push != null)//入力された数字がない場合は計算過程を飛ばす(＝+ や　＝×などの処理のため)
             {          
@@ -85,7 +85,11 @@ namespace WindowsFormsApplicationNEW
                         result = num1 / num2;
                         if (num2 == 0) {           //0の割り算のとき
                             label1.Text = "エラー";
-                            return; }
+                            buttun_push = null;//入力クリア
+                            Operator = null;//演算子クリア
+                            result = 0;//結果クリア
+                            syousuu = false;//小数点フラグリセット
+                            return;     }
                         break;
                     default://演算子が押されてなかったとき、入力文字をそのままresultに入れる
                         result = num2;
