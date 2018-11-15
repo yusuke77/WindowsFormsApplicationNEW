@@ -71,16 +71,16 @@ namespace WindowsFormsApplicationNEW
 
                 switch (Operator)
                 {
-                    case "+"://足し算が押されたとき
+                    case "＋"://足し算が押されたとき
                         result = num1 + num2;
                         break;
-                    case "-"://引き算が押されたとき
+                    case "－"://引き算が押されたとき
                         result = num1 - num2;
                         break;
-                    case "*"://掛け算が押されたとき
+                    case "×"://掛け算が押されたとき
                         result = num1 * num2;
                         break;
-                    case "/"://割り算が押されたとき
+                    case "÷"://割り算が押されたとき
                         result = num1 / num2;
                         if (num2 == 0) {           //0の割り算のとき
                             label1.Text = "エラー";
@@ -98,7 +98,7 @@ namespace WindowsFormsApplicationNEW
                 Button btn = (Button)sender;//数字の時と同様にsenderをbtnに代入
                 Operator = btn.Text;//演算子をoperatorに入れる
                 syousuu = false;//小数点フラグリセット
-                if (Operator == "=")//operatorが「＝」であるとき
+                if (Operator == "＝")//operatorが「＝」であるとき
                 {
                     Operator = null;//演算子をクリア
                 }

@@ -166,7 +166,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(45, 41);
             this.button12.TabIndex = 11;
-            this.button12.Text = "/";
+            this.button12.Text = "÷";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -176,7 +176,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(45, 41);
             this.button13.TabIndex = 12;
-            this.button13.Text = "*";
+            this.button13.Text = "×";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -186,7 +186,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(45, 41);
             this.button14.TabIndex = 13;
-            this.button14.Text = "-";
+            this.button14.Text = "－";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -196,7 +196,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(45, 41);
             this.button15.TabIndex = 14;
-            this.button15.Text = "+";
+            this.button15.Text = "＋";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -226,18 +226,18 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(45, 41);
             this.button18.TabIndex = 17;
-            this.button18.Text = "=";
+            this.button18.Text = "＝";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button12_Click);
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 23);
+            this.label1.Font = new System.Drawing.Font("ＭＳ ゴシック", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(32, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(317, 36);
+            this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.label1.Size = new System.Drawing.Size(293, 52);
             this.label1.TabIndex = 18;
-            this.label1.Text = "　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　\r\n\r\n\r\n";
             // 
             // button19
             // 
@@ -287,7 +287,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
